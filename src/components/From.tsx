@@ -1,6 +1,21 @@
+import { useState } from "react"
 import { categories } from "../data/db"
 
 export default function From() {
+
+    const [activity, setActivity] = useState({
+        category: '',
+        name: '',
+        calories: ''
+    })
+
+    const handleChange = (e) => {
+        setActivity({
+            ...activity,
+            [e.target.id]: e.target.value
+        })
+    }
+
     return (
         <form
             className="space-y-5 bg-white p-5 rounded-lg shadow"
@@ -10,6 +25,8 @@ export default function From() {
                 <select
                     className="border border-slate-300 bg-white rounded-lg w-full p-2"
                     id="category"
+                    value={activity.category}
+                    onChange={handleChange}
                 >
                     {categories.map(category => (
                         <option
@@ -23,12 +40,14 @@ export default function From() {
             </div>
 
             <div className="grid grid-cols-1 gap-3">
-                <label htmlFor="activity" className="font-bold">Actividad</label>
+                <label htmlFor="name" className="font-bold">Actividad</label>
                 <input
-                    id="activity"
+                    id="name"
                     type="text"
                     className="border border-slate-300 bg-white rounded-lg w-full p-2"
                     placeholder="Ej. Caminata, pesas, etc."
+                    value={activity.name}
+                    onChange={handleChange}
                 />
             </div>
             <div className="grid grid-cols-1 gap-3">
@@ -38,6 +57,8 @@ export default function From() {
                     type="number"
                     className="border border-slate-300 bg-white rounded-lg w-full p-2"
                     placeholder="Calorías, Ej. 300 o 500"
+                    value={activity.calories}
+                    onChange={handleChange}
                 />
             </div>
 
@@ -46,7 +67,6 @@ export default function From() {
                 className=" bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
                 value="Guardar"
             />
-
         </form >
     )
 }

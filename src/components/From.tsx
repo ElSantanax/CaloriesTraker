@@ -1,18 +1,21 @@
 import { useState } from "react"
+import { Activity } from "../types"
 import { categories } from "../data/db"
 
 export default function From() {
 
-    const [activity, setActivity] = useState({
-        category: '',
+    const [activity, setActivity] = useState<Activity>({
+        category: 1,
         name: '',
-        calories: ''
+        calories: 0
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+        const isNumberField = ['category', 'calories'].includes(e.target.id)
+
         setActivity({
             ...activity,
-            [e.target.id]: e.target.value
+            [e.target.id]: isNumberField ? +e.target.value : e.target.value
         })
     }
 

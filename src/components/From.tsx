@@ -9,7 +9,7 @@ export default function From() {
         calories: ''
     })
 
-    const handleChange = (e) => {
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
         setActivity({
             ...activity,
             [e.target.id]: e.target.value
@@ -38,7 +38,6 @@ export default function From() {
                     ))}
                 </select>
             </div>
-
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="name" className="font-bold">Actividad</label>
                 <input
@@ -61,10 +60,9 @@ export default function From() {
                     onChange={handleChange}
                 />
             </div>
-
             <input
                 type="submit"
-                className=" bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
+                className="bg-gray-800 hover:bg-gray-900 w-full p-2 font-bold uppercase text-white cursor-pointer"
                 value="Guardar"
             />
         </form >

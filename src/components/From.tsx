@@ -24,9 +24,15 @@ export default function From() {
         return name.trim() !== '' && calories > 0
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log("Guardando...");
+    }
+
     return (
         <form
             className="space-y-5 bg-white p-5 rounded-lg shadow"
+            onSubmit={handleSubmit}
         >
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="category" className="font-bold">Categoría</label>
@@ -52,7 +58,7 @@ export default function From() {
                     id="name"
                     type="text"
                     className="border border-slate-300 bg-white rounded-lg w-full p-2"
-                    placeholder="Ej. Caminata, pesas, etc."
+                    placeholder="Ej. Alimentos consumidos o ejercicios realizados"
                     value={activity.name}
                     onChange={handleChange}
                 />

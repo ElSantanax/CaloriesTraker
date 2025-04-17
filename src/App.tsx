@@ -1,6 +1,10 @@
+import { useReducer } from "react"
 import From from "./components/From"
+import { activityReducer, initialState } from "./reducers/activity-reducers"
 
 function App() {
+
+  const [state, dispatch] = useReducer(activityReducer, initialState)
 
   return (
     <>
@@ -17,7 +21,9 @@ function App() {
 
       <section className="bg-lime-500 py-20 px-5">
         <div className="max-w-4xl mx-auto">
-          <From />
+          <From
+            dispatch={dispatch}
+          />
         </div>
       </section >
     </>

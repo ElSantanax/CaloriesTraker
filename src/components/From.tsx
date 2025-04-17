@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { Dispatch, useState } from "react"
 import { Activity } from "../types"
 import { categories } from "../data/db"
+import { ActivityActions } from "../reducers/activity-reducers"
 
-export default function From() {
+type FromProps = {
+    dispatch: Dispatch<ActivityActions>
+}
+
+export default function From({ dispatch }: FromProps) {
 
     const [activity, setActivity] = useState<Activity>({
         category: 1,
@@ -26,7 +31,7 @@ export default function From() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log("Guardando...");
+        dispatch({ type: "save-activity", payload: { newActivity: activity } })
     }
 
     return (

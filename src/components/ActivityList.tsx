@@ -11,8 +11,7 @@ type ActivityListProps = {
 
 export default function ActivityList({ activities, dispatch }: ActivityListProps) {
 
-    const categoryName = useMemo(() => (category: Activity['category']) => categories.map(cat => cat.id === category ? cat.name : '')
-        , [categories])
+    const categoryName = useMemo(() => (category: Activity['category']) => categories.map(cat => cat.id === category ? cat.name : ''), [categories])
 
     return (
         <>

@@ -1,11 +1,12 @@
-import { Dispatch, useState } from "react"
+import { Dispatch, useState, useEffect } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { Activity } from "../types"
 import { categories } from "../data/db"
-import { ActivityActions } from "../reducers/activity-reducers"
+import { ActivityActions, ActivityState } from "../reducers/activity-reducers"
 
 type FromProps = {
-    dispatch: Dispatch<ActivityActions>
+    dispatch: Dispatch<ActivityActions>,
+    state: ActivityState
 }
 
 const initialState: Activity = {
@@ -15,9 +16,16 @@ const initialState: Activity = {
     calories: 0
 }
 
-export default function From({ dispatch }: FromProps) {
+export default function From({ dispatch, state }: FromProps) {
 
     const [activity, setActivity] = useState<Activity>(initialState)
+
+    useEffect(() => {
+        if (state.activeId) {
+            const selectedActivity = state.activities.filter(stateActivity => stateActivity.id === state.activeId)[0];
+            setActivity(selectedActivity)
+        }
+    }, [state.activeId])
 
     const handleChange = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
         const isNumberField = ['category', 'calories'].includes(e.target.id)
